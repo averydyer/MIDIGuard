@@ -1,0 +1,14 @@
+[project]
+name = "midiguard"
+version = "0.1.0"
+description = "MIDI analysis, music theory, and defensive cybersecurity"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
