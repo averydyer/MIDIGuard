@@ -1,14 +1,15 @@
 # Python virtual environment
 .venv/
 
-# Python cache files
+# Python cache directories
 __pycache__/
+# Compiled Python bytecode
 *.py[cod]
 
 # Testing
 .pytest_cache/
 
-# macOS files
+# macOS folder metadata
 .DS_Store
 
 # Environment variables and secrets

@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/midiguard/__init__.py
+src/midiguard.egg-info/PKG-INFO
+src/midiguard.egg-info/SOURCES.txt
+src/midiguard.egg-info/dependency_links.txt
+src/midiguard.egg-info/requires.txt
+src/midiguard.egg-info/top_level.txt
