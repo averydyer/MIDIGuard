@@ -3,5 +3,6 @@ Name: midiguard
 Version: 0.1.0
 Summary: MIDI analysis, music theory, and defensive cybersecurity
 Requires-Python: >=3.12
+Requires-Dist: mido
 Provides-Extra: dev
 Requires-Dist: pytest; extra == "dev"

@@ -5,6 +5,8 @@
 __pycache__/
 # Compiled Python bytecode
 *.py[cod]
+# Python package metadata
+*.egg-info/
 
 # Testing
 .pytest_cache/
