@@ -35,14 +35,14 @@ for index, track in enumerate(midi.tracks):
     for message in track:
         total_messages += 1
         absolute_time += message.time
-        # determine message type and print relevant information
-        if message.type == "note_on":
+        # if velocity is 0, that is considered a note_off
+        if message.type == "note_on" and message.velocity > 0:
             active_notes[message.note] = absolute_time
             print(
                 f"Note started: {midi_number_to_note_name(message.note)}", end=" ")
             print(f"| Time: {absolute_time} ticks")
             note_on_count += 1
-        elif message.type == "note_off":
+        elif message.type == "note_off" or (message.type == "note_on" and message.velocity == 0):
             # only calculate duration if note was first turned on
             if message.note in active_notes:
                 found_note = True
