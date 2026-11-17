@@ -26,36 +26,43 @@ def midi_number_to_note_name(number):
 
 # iterates through every track in file
 for index, track in enumerate(midi.tracks):
+    # keeps track of what notes are currently on and when they started
+    active_notes = {}
+    # time elapsed since start of track
+    absolute_time = 0
     print()
     print(f"Track: {index + 1}")
     for message in track:
         total_messages += 1
+        absolute_time += message.time
         # determine message type and print relevant information
         if message.type == "note_on":
-            print(f"Note started: {midi_number_to_note_name(message.note)}")
+            active_notes[message.note] = absolute_time
+            print(
+                f"Note started: {midi_number_to_note_name(message.note)}", end=" ")
+            print(f"| Time: {absolute_time} ticks")
             note_on_count += 1
         elif message.type == "note_off":
-            print(f"Note stopped: {midi_number_to_note_name(message.note)}")
+            # only calculate duration if note was first turned on
+            if message.note in active_notes:
+                found_note = True
+                note_duration = absolute_time - active_notes[message.note]
+                del active_notes[message.note]
+            else:
+                found_note = False
+                print(
+                    f"ERROR: {midi_number_to_note_name(message.note)} Note-off signal without preceding note-on")
+            print(
+                f"Note stopped: {midi_number_to_note_name(message.note)}", end=" ")
+            print(f"| Time: {absolute_time} ticks", end=" ")
+            # do not try to print duration if note was never turned on
+            if found_note:
+                print(f"| Duration: {note_duration} ticks")
+            else:
+                print()
             note_off_count += 1
         else:
-            print(f"Other event: {message.type}")
+            print(f"Other event: {message.type}", end=" ")
+            print(f"| Time: {absolute_time} ticks")
             other_count += 1
-print()
-
-print("MIDI Analysis Summary")
-print("---------------------")
-print(f"Total messages: {total_messages}")
-print(f"Note-on messages: {note_on_count}")
-print(f"Note-off messages: {note_off_count}")
-print(f"Other messages: {other_count}")
-print()
-
-# tests for midi number to note name conversion function
-print(midi_number_to_note_name(60))
-print(midi_number_to_note_name(64))
-print(midi_number_to_note_name(69))
-print(midi_number_to_note_name(72))
-print(midi_number_to_note_name(48))
-print(midi_number_to_note_name(150))
-print(midi_number_to_note_name(-5))
 print()
