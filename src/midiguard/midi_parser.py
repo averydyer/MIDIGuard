@@ -1,7 +1,7 @@
 import mido
 
 # creating midi object that contains data from sample midi file
-midi = mido.MidiFile("samples/test_note.mid")
+midi = mido.MidiFile("samples/unfinished_note.mid")
 
 octave_notes = ["C", "C#", "D", "D#", "E",
                 "F", "F#", "G", "G#", "A", "A#", "B"]
@@ -65,4 +65,9 @@ for index, track in enumerate(midi.tracks):
             print(f"Other event: {message.type}", end=" ")
             print(f"| Time: {absolute_time} ticks")
             other_count += 1
+    # check if any notes were never ended
+    if active_notes:
+        for note in active_notes:
+            print(
+                f"WARNING: Note {midi_number_to_note_name(note)} never ended")
 print()
