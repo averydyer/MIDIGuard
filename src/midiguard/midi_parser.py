@@ -1,7 +1,9 @@
 import mido
+# used for command line midi file selection
+import sys
 
 # creating midi object that contains data from sample midi file
-midi = mido.MidiFile("samples/unfinished_note.mid")
+midi = mido.MidiFile(sys.argv[1])
 
 octave_notes = ["C", "C#", "D", "D#", "E",
                 "F", "F#", "G", "G#", "A", "A#", "B"]
